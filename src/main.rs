@@ -31,7 +31,7 @@ fn main() -> Result<()> {
     });
 
     let count = entries.len();
-    let longest_name: usize = entries.iter().rev().max_by_key(|e| e.0.len()).unwrap().2 as usize;
+    let longest_name: usize = entries.iter().max_by_key(|e| e.0.len()).unwrap().2 as usize;
 
     let mut acc = String::with_capacity((21 + longest_name) * count);
 
@@ -61,7 +61,7 @@ fn extract_metadata(de: Result<DirEntry, std::io::Error>) -> Result<(String, Fil
 fn normalize_size(size: u64) -> (f64, usize) {
     let mut size = size as f64;
     let mut counter: usize = 0;
-    while size > 9.9 {
+    while size >= 10.0  {
         size /= 1024.0;
         counter += 1;
     }

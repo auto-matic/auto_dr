@@ -3,8 +3,10 @@ use std::{
     cmp::Ordering,
     fs::{self, DirEntry, FileType},
 };
+
 fn main() -> Result<()> {
-    let root_dir = fs::read_dir(".")?;
+    let args: Vec<String> = std::env::args().collect();
+    let root_dir = fs::read_dir(if args.len() > 1 { &args[1] } else { "." })?;
 
     let mut entries: Vec<(String, FileType, u64)> = root_dir
         .into_iter()
@@ -61,7 +63,7 @@ fn extract_metadata(de: Result<DirEntry, std::io::Error>) -> Result<(String, Fil
 fn normalize_size(size: u64) -> (f64, usize) {
     let mut size = size as f64;
     let mut counter: usize = 0;
-    while size >= 10.0  {
+    while size >= 10.0 {
         size /= 1024.0;
         counter += 1;
     }

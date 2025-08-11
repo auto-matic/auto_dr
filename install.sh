@@ -15,7 +15,7 @@ echo "Pulling newest version." &&
   echo "Building from source." &&
   cargo build --release &&
   echo 'Copying executable to "/usr/bin/".' &&
-  sudo cp ./target/release/auto_dr /usr/bin/core_perl/ &&
+  sudo cp ./target/release/auto_dr /usr/bin/ &&
   echo "Removing compilation artifacts." &&
   sudo rm -rf ./target &&
   echo "Installation of auto_dr finished."

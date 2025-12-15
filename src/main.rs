@@ -63,7 +63,7 @@ fn extract_metadata(de: Result<DirEntry, std::io::Error>) -> Result<(String, Fil
 fn normalize_size(size: u64) -> (f64, usize) {
     let mut size = size as f64;
     let mut counter: usize = 0;
-    while size >= 10.0 {
+    while size >= 100.0 {
         size /= 1024.0;
         counter += 1;
     }
@@ -94,12 +94,12 @@ fn display(entry: (String, FileType, u64)) -> String {
 
     if entry.1.is_dir() {
         format!(
-            " {0}  {1:>3.1} {2}    \x1b[34;4;1m{3}\x1b[0m/\n",
+            " {0}  {1:>4.1} {2}    \x1b[34;4;1m{3}\x1b[0m/\n",
             icon, size, SIZE_UNITS[si], entry.0
         )
     } else {
         format!(
-            " {0}  {1:>3.1} {2}    {3}\n",
+            " {0}  {1:>4.1} {2}    {3}\n",
             icon, size, SIZE_UNITS[si], entry.0
         )
     }
